@@ -1,33 +1,54 @@
 const player1 = {
-  name: "scorpion",
+  name: "Scorpion",
   hp: 100,
-  img: "",
+  img: "http://reactmarathon-api.herokuapp.com/assets/scorpion.gif",
   weapon: ["knife", "pistol"],
   attack: function () {
-    this.name + " Fight...";
+    console.log(this.name + " Fight...");
   },
 };
 
 const player2 = {
-  name: "sonya",
-  hp: 100,
-  img: "",
+  name: "Sonya",
+  hp: 90,
+  img: "http://reactmarathon-api.herokuapp.com/assets/sonya.gif",
   weapon: ["knife", "axe"],
   attack: function () {
-    this.name + " Fight...";
+    console.log(this.name + " Fight...");
   },
 };
 
-function createPlayer() {
-    const player1 = document.createElement('div');
-    player1.classList.add('player1');
+function createPlayer(player, object) {
+    let player = document.createElement('div');
+    player.classList.add('player');
+    document.querySelector('.arenas').appendChild(player)
 
-    const progressbar = docunent.createElement('div');
+    let progressbar = docunent.createElement('div');
     progressbar.classList.add('progressbar');
 
-    const character = document.createElement('div');
+    let character = document.createElement('div');
     character.classList.add('character');
 
-    player1.appendChild(progressbar);
-    player1.appendChild(character);
+    player.appendChild(progressbar);
+    player.appendChild(character);
+
+    let life = document.createElement('div');
+    life.classList.add('life');
+    life.style.width = object.hp + '%'; 
+
+    let name = document.createElement('div');
+    name.classList.add('name');
+    name.innerHTML = object.name;
+
+    let img = document.createElement('img');
+    img.src = object.img;
+
+    progressbar.appendChild(life);
+    progressbar.appendChild(name);
+
+    character.appendChild(img);
+
 }
+
+createPlayer('player1', player1);
+createPlayer('player2', player2);
