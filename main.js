@@ -18,10 +18,11 @@ const player2 = {
   },
 };
 
+const arenas = document.querySelector(".arenas");
+
 function createPlayer(player, object) {
     let player = document.createElement('div');
     player.classList.add('player');
-    document.querySelector('.arenas').appendChild(player)
 
     let progressbar = docunent.createElement('div');
     progressbar.classList.add('progressbar');
@@ -47,8 +48,14 @@ function createPlayer(player, object) {
     progressbar.appendChild(name);
 
     character.appendChild(img);
+    return player;
 
 }
 
 createPlayer('player1', player1);
 createPlayer('player2', player2);
+
+$arenas.appendChild(player1);
+$arenas.appendChild(player2); 
+
+//я запутался =(((
