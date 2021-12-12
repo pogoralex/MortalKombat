@@ -1,4 +1,6 @@
+
 const player1 = {
+  player: 1,
   name: "Scorpion",
   hp: 100,
   img: "http://reactmarathon-api.herokuapp.com/assets/scorpion.gif",
@@ -9,8 +11,9 @@ const player1 = {
 };
 
 const player2 = {
+  player: 2,
   name: "Sonya",
-  hp: 90,
+  hp: 100,
   img: "http://reactmarathon-api.herokuapp.com/assets/sonya.gif",
   weapon: ["knife", "axe"],
   attack: function () {
@@ -18,40 +21,47 @@ const player2 = {
   },
 };
 
+const arenas = document.querySelector(".arenas");
 
 
-function createPlayer(playerClass, playerObject) {
-    const player = document.createElement('div');
-    player.classList.add(playerClass);
+function createElement(tag, className) {
+  const $tag = document.createElement(tag);
+  if(className) {
+    $tag.classList.add(className);
+  }
+  
+  return $tag;
+}
 
-    const arenas = document.querySelector(".arenas");
-    arenas.appendChild(player);
+function createPlayer(playerObject) {
 
-    const progressbar = document.createElement('div');
-    progressbar.classList.add('progressbar');
+  const player = createElement('div', 'player' + playerObject.player);
+  const progressbar = createElement('div', 'progressbar');
+  const character = createElement('div', 'character');
+  const life = createElement('div', 'life');
+  const name = createElement('div', 'name');
+  const img = createElement('img');
 
-    const character = document.createElement('div');
-    character.classList.add('character');
 
-    const life = document.createElement("div");
-    life.classList.add("life");
-    life.style.width = playerObject.hp + "%"; 
+  life.style.width = playerObject.hp + "%";
+  name.innerText = playerObject.name;
+  img.src = playerObject.img;
 
-    const name = document.createElement("div");
-    name.classList.add("name");
-    name.innerText = playerObject.name;
+  progressbar.appendChild(life);
+  progressbar.appendChild(name);
 
-    const img = document.createElement("img");
-    img.src = playerObject.img;
+  character.appendChild(img);
 
-    player.appendChild(progressbar);
-    player.appendChild(character);
-    progressbar.appendChild(life);
-    progressbar.appendChild(name);
-    character.appendChild(img);
-
+  player.appendChild(progressbar);
+  player.appendChild(character);
+  
+  
+  
+  return player;
 
 }
 
-createPlayer('player1', player1);
-createPlayer('player2', player2);
+arenas.appendChild(createPlayer(player1));
+arenas.appendChild(createPlayer(player2));
+
+
