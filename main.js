@@ -18,44 +18,40 @@ const player2 = {
   },
 };
 
-const arenas = document.querySelector(".arenas");
 
-function createPlayer(player, object) {
-    let player = document.createElement('div');
-    player.classList.add('player');
 
-    let progressbar = docunent.createElement('div');
+function createPlayer(playerClass, playerObject) {
+    const player = document.createElement('div');
+    player.classList.add(playerClass);
+
+    const arenas = document.querySelector(".arenas");
+    arenas.appendChild(player);
+
+    const progressbar = document.createElement('div');
     progressbar.classList.add('progressbar');
 
-    let character = document.createElement('div');
+    const character = document.createElement('div');
     character.classList.add('character');
+
+    const life = document.createElement("div");
+    life.classList.add("life");
+    life.style.width = playerObject.hp + "%"; 
+
+    const name = document.createElement("div");
+    name.classList.add("name");
+    name.innerText = playerObject.name;
+
+    const img = document.createElement("img");
+    img.src = playerObject.img;
 
     player.appendChild(progressbar);
     player.appendChild(character);
-
-    let life = document.createElement('div');
-    life.classList.add('life');
-    life.style.width = object.hp + '%'; 
-
-    let name = document.createElement('div');
-    name.classList.add('name');
-    name.innerHTML = object.name;
-
-    let img = document.createElement('img');
-    img.src = object.img;
-
     progressbar.appendChild(life);
     progressbar.appendChild(name);
-
     character.appendChild(img);
-    return player;
+
 
 }
 
 createPlayer('player1', player1);
 createPlayer('player2', player2);
-
-$arenas.appendChild(player1);
-$arenas.appendChild(player2); 
-
-//я запутался =(((
