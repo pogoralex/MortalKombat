@@ -22,6 +22,7 @@ const player2 = {
 };
 
 const arenas = document.querySelector(".arenas");
+const randomButton = document.querySelector('.button');
 
 
 function createElement(tag, className) {
@@ -60,6 +61,42 @@ function createPlayer(playerObject) {
   return player;
 
 }
+
+function changeHP(player) {
+  const playerLife = document.querySelector('.player'+ player.player +' .life');
+  player.hp -= randomDamage();
+  playerLife.style.width = player.hp + '%';
+  
+
+  if (player.hp <= 0) {
+    arenas.appendChild(playerWin(player.name));
+    player.hp = 0;
+    randomButton.disabled = true;
+    randomButton.style.opacity = 0.5;
+  }
+  console.log(player.hp)
+}
+
+function playerWin (name) {
+  let loseTitle = document.querySelector('.loseTitle');
+  if (!loseTitle) {
+    loseTitle = createElement('div', 'loseTitle');
+    loseTitle.innerText = name + ' win';
+  } else {
+    loseTitle.innerText = 'Draw';
+  }
+
+  return loseTitle;
+}
+
+function randomDamage() {
+  return Math.ceil(Math.random() * 20);
+}
+
+randomButton.addEventListener('click' , function() {
+  changeHP(player1);
+  changeHP(player2);
+});
 
 arenas.appendChild(createPlayer(player1));
 arenas.appendChild(createPlayer(player2));
